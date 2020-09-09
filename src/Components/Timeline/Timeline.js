@@ -1,33 +1,34 @@
-import React, {Component} from 'react';
-import interact from 'interactjs'
-import './Timeline.css';
+import React from 'react'
 
+export default function Timeline(props) {
 
-class Timeline extends Component {
+    console.log(props.text)
+    let maxNum = parseInt(props.text)
+    let counter = [];
 
-    componentDidMount(){
-        interact('.Timeline').dropzone({
-            accept: '.Timeblock',
-          ondrop: function (event) {
-            alert(event.relatedTarget.id
-                  + ' was dropped into '
-                  + event.target.id)
-          }
-        })
-        .on('dropactivate', function (event) {
-          event.target.classList.add('drop-activated')
-        })
+    for (let index = 0; index < maxNum; index++) {
+        counter.push(index + 1)    
     }
 
-render (){
+    console.log(counter)
+    //we need to get an array of numbers where props number is max
+    // and 0 is min always
+    // each number is represented as a li 
+
+    let durationFragment = counter.map((item) => {
+        return (
+          <li key={item}>
+            {item}
+          </li>
+        );
+      });
+
     return (
-        <div className='Timeline'></div>
+        <React.Fragment>
+           <div>
+               <ul>Timeline</ul>
+              { durationFragment }
+           </div>
+        </React.Fragment>
     )
-    
 }
-
-
-
-}
-
-export default Timeline
